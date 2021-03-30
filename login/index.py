@@ -1,5 +1,5 @@
 #importar as bibliotecas
-import tkinter
+
 from tkinter import *
 from tkinter import messagebox
 
@@ -10,7 +10,7 @@ jan.title("APS- Bate Papo Unip")
 jan.geometry("600x300")
 jan.configure(background="white")
 jan.resizable(width=False, height=False)
-jan.attributes("-alpha", 1.0)
+jan.attributes("-alpha", 0.7)
 
 #jan.iconbitmap(default="#")
 
