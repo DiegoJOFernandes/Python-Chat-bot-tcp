@@ -3,12 +3,12 @@
 from tkinter import *
 from tkinter import messagebox
 import DataBaser
-
+import menu
 
 #criar nossa janela 
 jan = Tk()
 jan.title("APS- Bate Papo Unip")
-jan.geometry("600x300")
+jan.geometry("700x300")
 jan.configure(background="white")
 jan.resizable(width=False, height=False)
 jan.attributes('-alpha', 0.7)
@@ -57,6 +57,7 @@ def login_user():
   try:
     if (user in VerifyLogin and password in VerifyLogin):
       messagebox.showinfo(title="Autentication", message="Confirmado! Seja Bem-vindo!")
+      
   except:
     messagebox.showerror(title="Autentication", message="Usuário ou senha incorreta!")
 
