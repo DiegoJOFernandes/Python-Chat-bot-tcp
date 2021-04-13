@@ -3,12 +3,12 @@
 from tkinter import *
 from tkinter import messagebox
 import DataBaser
-
+import menu
 
 #criar nossa janela 
 jan = Tk()
 jan.title("APS- Bate Papo Unip")
-jan.geometry("600x300")
+jan.geometry("700x300")
 jan.configure(background="white")
 jan.resizable(width=False, height=False)
 jan.attributes('-alpha', 0.7)
@@ -44,11 +44,25 @@ UserEntry.place(x=140,y=110)
 PassLabel = Label(RightFrame, text="Password:", font=("Century Gothic", 16), bg="white", fg="black")
 PassLabel.place(x=5,y=152)
 
-PassEntry = Entry(RightFrame, width=28, show="*")
+PassEntry = Entry(RightFrame, width=28, show="°")
 PassEntry.place(x=140,y=160)
 
+def login_user():
+  DataBaser.cursor.execute("""
+  SELECT * FROM Users
+  WHERE (user = ? AND password = ?)
+  """, (user, password))
+  print("")
+  VerifyLogin = DataBaser.cursor.fetchone
+  try:
+    if (user in VerifyLogin and password in VerifyLogin):
+      messagebox.showinfo(title="Autentication", message="Confirmado! Seja Bem-vindo!")
+      
+  except:
+    messagebox.showerror(title="Autentication", message="Usuário ou senha incorreta!")
+
 #botoes
-LoginButton = Button(RightFrame, text="Login", width=20)
+LoginButton = Button(RightFrame, text="Login", width=20, command=login_user)
 LoginButton.place(x=100, y=225)
 
 def Register():
@@ -70,12 +84,16 @@ def Register():
     name = NomeEntry.get()
     email = EmailEntry.get()
     user = UserEntry.get()
-    password = PassEntry.get() 
-    DataBaser.cursor.execute(""" 
-    INSERT INTO Users(name,email,user,password) VALUES(?,?,?,?)
-    """, (name,email,user,password))
-    DataBaser.conn.commit()
-    messagebox.showinfo(title= "Status cadastro", message="Cadastro realizado com sucesso!")
+    password = PassEntry.get()
+
+    if(name == "" and email == "" and user == "" and password == ""):
+      messagebox.showerror(title="Preenchimento dos dados", message="Preencha todos os campos!")
+    else:
+      DataBaser.cursor.execute(""" 
+      INSERT INTO Users(name,email,user,password) VALUES(?,?,?,?)
+      """, (name,email,user,password))
+      DataBaser.conn.commit()
+      messagebox.showinfo(title= "Status cadastro", message="Cadastro realizado com sucesso!")
   
   Register = Button(RightFrame,text="Salvar", width=20, command=RegisterToDataBase)
   Register.place(x=100, y=225)
@@ -97,9 +115,11 @@ def Register():
   Back.place(x=100, y=260)
 
 
-
 RegisterButton = Button(RightFrame,text="Cadastre-se", width=20, command=Register)
 RegisterButton.place(x=100, y=260)
+
+
+# def ListData():
 
 
 
