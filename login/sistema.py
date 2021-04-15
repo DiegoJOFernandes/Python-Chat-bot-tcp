@@ -44,7 +44,7 @@ UserEntry.place(x=140,y=110)
 PassLabel = Label(RightFrame, text="Password:", font=("Century Gothic", 16), bg="white", fg="black")
 PassLabel.place(x=5,y=152)
 
-PassEntry = Entry(RightFrame, width=28, show="°")
+PassEntry = Entry(RightFrame, width=28, show="*")
 PassEntry.place(x=140,y=160)
 
 def login_user():
@@ -57,7 +57,6 @@ def login_user():
   try:
     if (user in VerifyLogin and password in VerifyLogin):
       messagebox.showinfo(title="Autentication", message="Confirmado! Seja Bem-vindo!")
-      
   except:
     messagebox.showerror(title="Autentication", message="Usuário ou senha incorreta!")
 
