@@ -6,9 +6,6 @@ from tkinter import *
 
 class ChatConnect:
 
-    
-
-
     janelaChat = Tk()
     janelaChat.geometry("700x300")
     janelaChat.configure(background="white")

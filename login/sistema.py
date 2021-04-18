@@ -6,8 +6,6 @@ from menu import *
 
 class Systema:
 
-  
-
   # import menu
 
   #criar nossa janela 
@@ -62,7 +60,6 @@ class Systema:
     try:
       if (user in VerifyLogin and password in VerifyLogin):
         messagebox.showinfo(title="Autentication", message="Confirmado! Seja Bem-vindo!")
-        
     except:
       messagebox.showerror(title="Autentication", message="Usuário ou senha incorreta!")
 

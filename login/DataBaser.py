@@ -14,6 +14,17 @@ CREATE TABLE IF NOT EXISTS Users (
 );
  """)
 
+def getNameUser():
+  user = cursor.execute("""
+    SELECT user FROM Users
+      WHERE id=(
+        SELECT max(id) FROM Users)""").fetchone()
+  print(user)
+    
+
+getNameUser()
+
+
 print("Conectado ao Banco de Dados")
 # cursor.execute(""" 
 #   INSERT INTO Users values(name, email, user, password)
