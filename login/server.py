@@ -2,8 +2,7 @@ import socket
 import threading
 
 class OpenServer:
-  host = socket.gethostname()   
-	# host = "127.0.0.1"
+  host = socket.gethostbyname(socket.gethostname())
 	port = 55555
 
 	# Starting Server
