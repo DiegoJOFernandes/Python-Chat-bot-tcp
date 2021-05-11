@@ -2,7 +2,7 @@
 from tkinter import *
 from tkinter import messagebox
 import DataBaser
-from menu import *
+# from menu import *
 
 
 class Systema:

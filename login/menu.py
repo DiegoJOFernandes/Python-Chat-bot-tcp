@@ -1,6 +1,6 @@
 from tkinter import *
-import server
-import chat
+#import server
+# import chat
 
 
   # import chatconnec as chatclient
@@ -20,7 +20,7 @@ class OpcoesMenu:
     myframe = Frame(master)
     myframe.pack()
 
-    server = server.OpenServer()
+    # server = server.OpenServer()
 
     def openChat():
       newWindowChat = Tk()
