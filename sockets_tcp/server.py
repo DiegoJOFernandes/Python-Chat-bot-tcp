@@ -1,24 +1,27 @@
 import socket
 import threading
 
-host = "127.0.0.1"
+host = "127.0.0.2"
 port = 55555
 
 # Starting Server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.bind((host, port))
 server.listen()
+print("server listen...")
 
 # Lists For Clients and Their Nicknames
 clients = []
 nicknames = []
 
+# transmissão
 # Sending Messages To All Connected Clients
 def broadcast(message):
     for client in clients:
         client.send(message)
-        
-# Handling Messages From Clients
+
+#Tratamento de mensagens de clientes
 def handle(client):
     while True:
         try:
@@ -40,7 +43,7 @@ def receive():
     while True:
         # Accept Connection
         client, address = server.accept()
-        print("Connectado com {}".format(str(address)))
+        print("Nova conexão {}".format(str(address)))
 
         # Request And Store Nickname
         client.send('NICK'.encode('ascii'))
@@ -49,13 +52,12 @@ def receive():
         clients.append(client)
 
         # Print And Broadcast Nickname
-        print("Seu Nickname é {}".format(nickname))
+        print("{} Entrou na rede!".format(nickname))
         broadcast("{} Entrou!".format(nickname).encode('ascii'))
         client.send('Conectado ao server!'.encode('ascii'))
 
         # Start Handling Thread For Client
         thread = threading.Thread(target=handle, args=(client,))
         thread.start()
-        
 receive()
 

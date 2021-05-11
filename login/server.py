@@ -1,20 +1,24 @@
 import socket
 import threading
 
-class OpenServer:
-  host = socket.gethostbyname(socket.gethostname())
-	port = 55555
+host= '127.0.0.3'
+# host = socket.gethostbyname(socket.gethostname())
+port = 55555
 
+class OpenServer:
+	
 	# Starting Server
 	server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	server.bind((host, port))
 	server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+	server.bind((host, port))
 	server.listen(10)
 	print('Aguardando conexão!')
+	
 
 	# Lists For Clients and Their Nicknames
 	clients = []
 	nicknames = []
+	print(clients, nicknames)
 
 	# Sending Messages To All Connected Clients
 	def broadcast(message):
@@ -40,27 +44,29 @@ class OpenServer:
 
 	# Receiving / Listening Function
 	def receive():
-	  while True:
-	    # Accept Connection
-	    client, address = server.accept()
-	    print("Connectado com {}".format(str(address)))
+  		while True:
+			# Accept Connection
+    		client, address = server.accept()
+    		print("Nova conexão {}".format(str(address)))
+	
+			# Request And Store Nickname
+    		client.send('NICK'.encode('ascii'))
+    		nickname = client.recv(1024).decode('ascii')
+    		nicknames.append(nickname)
+    		clients.append(client)
+	
+	
+			# Print And Broadcast Nickname
+    		print("{} Entrou na rede!".format(nickname))
+    		broadcast("{} Entrou!".format(nickname).encode('ascii'))
+    		client.send('Conectado ao server!'.encode('ascii'))
+	
+				
+			# Start Handling Thread For Client
+    		thread = threading.Thread(target=handle, args=(client,))
+    		thread.start()
+			print('Listen...')
+      
+	receive()
 
-	    # Request And Store Nickname
-	    client.send('NICK'.encode('ascii'))
-	    nickname = client.recv(1024).decode('ascii')
-	    nicknames.append(nickname)
-	    clients.append(client)
-
-	    # Print And Broadcast Nickname
-	    print("Seu Nickname é {}".format(nickname))
-	    broadcast("{} Entrou!".format(nickname).encode('ascii'))
-	    client.send('Conectado ao server!'.encode('ascii'))
-
-	    # Start Handling Thread For Client
-	    thread = threading.Thread(target=handle, args=(client,))
-	    thread.start()
-
-		
-
-
-
+a = OpenServer()

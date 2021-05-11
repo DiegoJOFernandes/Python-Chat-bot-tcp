@@ -1,6 +1,6 @@
 from tkinter import *
 import connectClient
-import server
+
 # root = Tk()
 # root.title("JanelaChata")
 
@@ -17,12 +17,11 @@ class NewChat:
     self.user2 = "Lucas"
     self.data = "22/04/2021"
 
-    server = server.OpenServer()
-    server.receive()
+    
 
-    clientUser = connectClient.ConnectClients()
+    clientUser = connectClient.StartConnectClient()
     clientUser.chooseName(self.user)
-    clientUser.receive()
+    
 
     titleChat = f"Chat - Conversa de {self.user} com {self.user2} - Data {self.data}"
     master.title(titleChat)
