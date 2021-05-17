@@ -1,0 +1,19 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<form action="{{ url_for('signin') }}" method="post" class="form">
+    <div>
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" id="email" />
+    </div>
+    <div>
+        <label for="password" class="form-label">Senha</label>
+        <input type="password" class="form-control" name="password" id="password" />
+    </div>
+    <div></div>
+    <button type="submit" class="btn btn-primary">Login</button>
+    <div></div>
+    <div>
+        <a href="{{ url_for('cadastro') }}">Faça Cadastro</a> 
+    </div> 
+</form>
+{% endblock %}

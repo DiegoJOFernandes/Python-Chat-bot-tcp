@@ -1,0 +1,29 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<form action="{{ url_for('graphic') }}" method="post" class="form">
+    <div>
+        <label for="name" class="form-label">Empresa</label>
+        <input type="text" class="form-control" name="empresa" id="inc" />
+    </div>
+    <div>
+        <label for="material" class="form-label">Material</label>
+        <input type="text" class="form-control" name="material" id="material" />
+    </div>
+    <div>
+        <label for="quantidade" class="form-label">Quantidade(l)</label>
+        <input type="text" class="form-control" name="quantidade" id="qtd" />
+    </div>
+    <div>
+        <label for="city" class="form-label">Cidade</label>
+        <input type="text" class="form-control" name="cidade" id="city" />
+    </div>
+    <div></div>
+    <button type="submit" class="btn btn-primary">Show graphic</button>
+    <div></div>
+    <div>
+        <a href="{{ url_for('login') }}">Faça Login</a> 
+    </div> 
+    
+</form>
+
+{% endblock %}
