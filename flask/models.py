@@ -5,3 +5,10 @@ class User:
         self.email = email
         self.username = username
         self.password = password
+class Grafico:
+    def __init__(self, empresa, material, quantidade, cidade):
+        self.empresa = empresa
+        self.material = material
+        self.quantidade = quantidade
+        self.cidade = cidade
+        

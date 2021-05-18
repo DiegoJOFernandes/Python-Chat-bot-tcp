@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mysqldb import MySQL
 
-from models import User
-from dao import UserDao
+from models import User, Grafico
+from dao import UserDao, GraficoDao
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -19,9 +19,9 @@ def index():
 def cadastro():
     return render_template('cadastro.html')
 
-@app.route('/graphic')
+@app.route('/grafico')
 def graphic():
-    return render_template('graphic.html')
+    return render_template('grafico.html')
 
 
 @app.route('/signup', methods=['POST',])
