@@ -1,0 +1,10 @@
+.chat {
+    display: flex;
+    flex-direction: column;
+}
+.chat span {
+    margin-bottom: 10px;
+}
+form {
+    margin-top: 10px;
+}

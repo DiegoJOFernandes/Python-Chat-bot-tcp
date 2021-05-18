@@ -2,7 +2,8 @@ import MySQLdb
 conn = MySQLdb.connect(user='root', passwd='root', host='127.0.0.1', port=3306)
 
 criar_tabelas = '''
-    USE aps;
+    CREATE DATABASE teste;
+    USE teste;
     CREATE TABLE users (
       id int not null auto_increment,
       name varchar(30) not null,

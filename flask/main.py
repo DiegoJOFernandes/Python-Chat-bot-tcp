@@ -1,16 +1,33 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mysqldb import MySQL
+from flask_socketio import SocketIO, emit, send
 
 from models import User
 from dao import UserDao
 
 app = Flask(__name__)
-app.config.from_pyfile('config.py')
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 
 db = MySQL(app)
 user_dao = UserDao(db)
 
-@app.route('/')
+messages = []
+
+@app.route("/")
+def home():
+    return render_template("chat.html")
+
+@socketio.on('sendMessage')
+def send_message_handler(msg):
+    messages.append(msg)
+    emit('getMessage', msg, broadcast=True)
+
+@socketio.on('message')
+def message_handler(msg):
+    send(messages)
+
+@app.route('/a')
 def index():
     return render_template('index.html')
 
@@ -50,5 +67,5 @@ def signin():
         flash('E-mail ou senhas incorretos')
         return redirect(url_for('login'))
 
-
-app.run(debug=True)
+if __name__ == "__main__":
+    socketio.run(app, debug=True)
