@@ -1,15 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mysqldb import MySQL
 
+
 from models import User
 from dao import UserDao
 
 app = Flask(__name__)
+
 app.config.from_pyfile('config.py')
 
 db = MySQL(app)
 user_dao = UserDao(db)
 
+
+@app.route('/quemsomos')
+def quemsomos():
+    return render_template('quemsomos.html')
+
+    
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -49,6 +57,7 @@ def signin():
     else:
         flash('E-mail ou senhas incorretos')
         return redirect(url_for('login'))
+
 
 
 app.run(debug=True)
