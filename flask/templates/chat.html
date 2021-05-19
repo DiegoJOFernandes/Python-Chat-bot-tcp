@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
+{% extends "template.html" %}
+{% block conteudo %}
     <style>
         .chat {
             display: flex;
@@ -14,8 +12,7 @@
             margin-top: 10px;
         }
     </style>
-</head>
-<body>
+
     <div class="chat"></div>
     <div>
         <form>
@@ -25,8 +22,8 @@
         </form>
     </div>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
         window.onload = function() {
             const socket = io('http://127.0.0.1:5000');
 
@@ -61,7 +58,6 @@
             })
 
         }
-
     </script>
-</body>
-</html>
+
+{% endblock %}
